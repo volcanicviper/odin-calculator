@@ -34,7 +34,7 @@ const equalsButton = document.querySelector(".equals");
 const clearButton = document.querySelector(".clear");
 
 let firstVal = "";
-let secondVal = "";
+let storedVal = "";
 let operation = "";
 let result = "";
 
@@ -49,24 +49,37 @@ digits.forEach((digit) => {
 
 operators.forEach((operator) => {
     operator.addEventListener('click', function() {
-        secondVal = firstVal;
-        operation = operator.textContent;
-        display.textContent = firstVal + operation;
+        if (storedVal) {
+            calculateResult();
+            storedVal = result;
+            operation = operator.textContent;
+            display.textContent = result + operation;
+        }
+        else {
+            storedVal = firstVal;
+            operation = operator.textContent;
+            display.textContent = firstVal + operation;
+        }
         firstVal = "";
     })
 });
 
 equalsButton.addEventListener('click', function() {
-    result = operate(operation, parseInt(secondVal), parseInt(firstVal));
-    display.textContent = secondVal + " " + operation + " " + firstVal + " = " + result;
+    calculateResult();
+    display.textContent = storedVal + " " + operation + " " + firstVal + " = " + result;
     firstVal = "";
-    secondVal = "";
+    storedVal = "";
 });
 
 clearButton.addEventListener('click', function() {
     display.textContent = 0;
     firstVal = "";
-    secondVal = "";
+    storedVal = "";
     operation = "";
     result = "";
 });
+
+function calculateResult() {
+    result = operate(operation, parseInt(storedVal), parseInt(firstVal));
+
+}
