@@ -92,11 +92,14 @@ decButton.addEventListener('click', function() {
 });
 
 function calculateResult() {
-    if (operation === "/" && firstVal === "0") {
+    if (operation === "/" && Math.trunc(firstVal) === 0) {
         result = "DIVISION BY ZERO";
         firstVal = "";
         storedVal = "";
         operation = "";
     }
-    else result = operate(operation, parseFloat(storedVal), parseFloat(firstVal));
+    else {
+        result = operate(operation, parseFloat(storedVal), parseFloat(firstVal));
+        result = Math.round(result * 1000) / 1000;
+    }
 }
