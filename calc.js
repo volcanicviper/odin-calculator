@@ -27,16 +27,36 @@ function operate(op, num1, num2) {
     }
 }
 
-const display = document.getElementById('display');
-const digits = document.querySelectorAll('.digit');
-const operators = document.querySelectorAll('.operator');
-let displayValue = 0;
-let firstInput = 0;
+const display = document.querySelector("#display");
+const digits = document.querySelectorAll(".digit");
+const operators = document.querySelectorAll(".operator");
+const equalsButton = document.querySelector(".equals");
+
+let firstVal = "";
+let secondVal = "";
 let operation = "";
+let result = "";
+
+display.textContent = 0;
 
 digits.forEach((digit) => {
     digit.addEventListener('click', function() {
-      displayValue += parseInt(digit.textContent);
-      display.textContent = displayValue;
+        firstVal += digit.textContent;
+        display.textContent = firstVal;
     })
-  });
+});
+
+operators.forEach((operator) => {
+    operator.addEventListener('click', function() {
+        secondVal = firstVal;
+        operation = operator.textContent;
+        display.textContent = firstVal + operation;
+        firstVal = "";
+    })
+})
+
+equalsButton.addEventListener('click', function() {
+    result = operate(operation, parseInt(firstVal), parseInt(secondVal));
+    display.textContent = secondVal + " " + operation + " " + firstVal + " = " + result;
+    secondVal = result;
+})
