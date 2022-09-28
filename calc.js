@@ -32,18 +32,22 @@ const digits = document.querySelectorAll(".digit");
 const operators = document.querySelectorAll(".operator");
 const equalsButton = document.querySelector(".equals");
 const clearButton = document.querySelector(".clear");
+const decButton = document.querySelector("#decimal");
 
 let firstVal = "";
 let storedVal = "";
 let operation = "";
 let result = "";
+let decimal = 0;
 
 display.textContent = "_";
 
 digits.forEach((digit) => {
     digit.addEventListener('click', function() {
-        firstVal += digit.textContent;
-        display.textContent = firstVal;
+        if (digit.id != "decimal" || decimal === 0) {
+            firstVal += digit.textContent;
+            display.textContent = firstVal;
+        }
     })
 });
 
@@ -61,6 +65,7 @@ operators.forEach((operator) => {
             display.textContent = firstVal + " " + operation;
         }
         firstVal = "";
+        decimal = 0;
     })
 });
 
@@ -77,6 +82,13 @@ clearButton.addEventListener('click', function() {
     storedVal = "";
     operation = "";
     result = "";
+    decimal = 0;
+});
+
+decButton.addEventListener('click', function() {
+    if (decimal === 0) {
+        decimal += 1;
+    }
 });
 
 function calculateResult() {
@@ -86,5 +98,5 @@ function calculateResult() {
         storedVal = "";
         operation = "";
     }
-    else result = operate(operation, parseInt(storedVal), parseInt(firstVal));
+    else result = operate(operation, parseFloat(storedVal), parseFloat(firstVal));
 }
