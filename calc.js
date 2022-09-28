@@ -26,3 +26,17 @@ function operate(op, num1, num2) {
             return divide(num1, num2);
     }
 }
+
+const display = document.getElementById('display');
+const digits = document.querySelectorAll('.digit');
+const operators = document.querySelectorAll('.operator');
+let displayValue = 0;
+let firstInput = 0;
+let operation = "";
+
+digits.forEach((digit) => {
+    digit.addEventListener('click', function() {
+      displayValue += parseInt(digit.textContent);
+      display.textContent = displayValue;
+    })
+  });
