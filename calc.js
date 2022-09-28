@@ -53,12 +53,12 @@ operators.forEach((operator) => {
             calculateResult();
             storedVal = result;
             operation = operator.textContent;
-            display.textContent = result + operation;
+            display.textContent = result + " " + operation;
         }
         else {
             storedVal = firstVal;
             operation = operator.textContent;
-            display.textContent = firstVal + operation;
+            display.textContent = firstVal + " " + operation;
         }
         firstVal = "";
     })
@@ -67,8 +67,6 @@ operators.forEach((operator) => {
 equalsButton.addEventListener('click', function() {
     calculateResult();
     display.textContent = storedVal + " " + operation + " " + firstVal + " = " + result;
-    firstVal = "";
-    storedVal = "";
 });
 
 clearButton.addEventListener('click', function() {
@@ -81,5 +79,4 @@ clearButton.addEventListener('click', function() {
 
 function calculateResult() {
     result = operate(operation, parseInt(storedVal), parseInt(firstVal));
-
 }
