@@ -31,6 +31,7 @@ const display = document.querySelector("#display");
 const digits = document.querySelectorAll(".digit");
 const operators = document.querySelectorAll(".operator");
 const equalsButton = document.querySelector(".equals");
+const clearButton = document.querySelector(".clear");
 
 let firstVal = "";
 let secondVal = "";
@@ -53,11 +54,19 @@ operators.forEach((operator) => {
         display.textContent = firstVal + operation;
         firstVal = "";
     })
-})
+});
 
 equalsButton.addEventListener('click', function() {
     result = operate(operation, parseInt(firstVal), parseInt(secondVal));
     display.textContent = secondVal + " " + operation + " " + firstVal + " = " + result;
     firstVal = "";
     secondVal = "";
-})
+});
+
+clearButton.addEventListener('click', function() {
+    display.textContent = 0;
+    firstVal = "";
+    secondVal = "";
+    operation = "";
+    result = "";
+});
