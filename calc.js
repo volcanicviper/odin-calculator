@@ -58,5 +58,6 @@ operators.forEach((operator) => {
 equalsButton.addEventListener('click', function() {
     result = operate(operation, parseInt(firstVal), parseInt(secondVal));
     display.textContent = secondVal + " " + operation + " " + firstVal + " = " + result;
-    secondVal = result;
+    firstVal = "";
+    secondVal = "";
 })
