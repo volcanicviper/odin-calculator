@@ -65,8 +65,10 @@ operators.forEach((operator) => {
 });
 
 equalsButton.addEventListener('click', function() {
-    calculateResult();
-    display.textContent = storedVal + " " + operation + " " + firstVal + " = " + result;
+    if (storedVal && firstVal !== "") {
+        calculateResult();
+        display.textContent = storedVal + " " + operation + " " + firstVal + " = " + result;
+    }
 });
 
 clearButton.addEventListener('click', function() {
