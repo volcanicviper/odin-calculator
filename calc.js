@@ -38,7 +38,7 @@ let storedVal = "";
 let operation = "";
 let result = "";
 
-display.textContent = 0;
+display.textContent = "_";
 
 digits.forEach((digit) => {
     digit.addEventListener('click', function() {
@@ -80,5 +80,11 @@ clearButton.addEventListener('click', function() {
 });
 
 function calculateResult() {
-    result = operate(operation, parseInt(storedVal), parseInt(firstVal));
+    if (operation === "/" && firstVal === "0") {
+        result = "DIVISION BY ZERO";
+        firstVal = "";
+        storedVal = "";
+        operation = "";
+    }
+    else result = operate(operation, parseInt(storedVal), parseInt(firstVal));
 }
